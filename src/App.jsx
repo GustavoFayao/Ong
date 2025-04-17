@@ -1,7 +1,7 @@
 
 function App() {
   return (
-    <div className="text-3xl font-bold text-blue-600">
+    <div className="text-6xl text-orange-500 font-bold ">
       Tailwind funcionando! 🚀
     </div>
   )
