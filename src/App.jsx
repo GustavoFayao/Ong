@@ -1,9 +1,10 @@
+import { Mulher } from "./components/Mulher"
 
 function App() {
   return (
-    <div className="text-6xl text-orange-500 font-bold font-robert-medium">
-      Tailwind funcionando! 🚀
-    </div>
+    <main className="relative min-h-screen w-screen overflow-x-hidden ">
+      <Mulher/>
+    </main>
   )
 }
 
