@@ -9,7 +9,7 @@ export const Mulher = () => {
   const totalVideos = 3;
   const nextVideoRef = useRef(null);
 
-  const
+
   const upcomingVideoIndex = (currentIndex % totalVideos) + 1;
 
   const handlerVideoLoad = () => {
