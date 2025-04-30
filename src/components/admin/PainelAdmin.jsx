@@ -22,9 +22,7 @@ export const PainelAdmin = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        navigate('/login');
-      }
+      if (!user) navigate('/login');
     });
     return () => unsubscribe();
   }, [navigate]);
@@ -37,36 +35,31 @@ export const PainelAdmin = () => {
         const imageData = await uploadImage(form.imagem);
         imageUrl = imageData.secure_url;
       }
-
       await addDoc(collection(db, 'noticias'), {
         titulo: form.titulo,
         conteudo: form.conteudo,
         imagemUrl: imageUrl,
         criadoEm: new Date(),
       });
-
       alert('Notícia publicada!');
       setForm({ titulo: '', conteudo: '', imagem: null });
       fetchNoticias();
     } catch (error) {
-      console.error("Erro ao publicar notícia:", error);
+      console.error('Erro ao publicar notícia:', error);
     }
   };
 
   const handleUploadArquivo = async (e) => {
     e.preventDefault();
     if (!arquivo) return alert('Selecione um arquivo');
-
     try {
       const result = await uploadPDF(arquivo);
       const fileUrl = result.cdnUrl;
-
       await addDoc(collection(db, 'transparencia'), {
         nome: arquivo.name,
         url: fileUrl,
         enviadoEm: new Date(),
       });
-
       alert('Arquivo enviado com sucesso');
       setArquivo(null);
       fetchArquivos();
@@ -77,8 +70,7 @@ export const PainelAdmin = () => {
   };
 
   const handleDeleteArquivo = async (id) => {
-    const confirm = window.confirm('Tem certeza que deseja excluir este arquivo?');
-    if (!confirm) return;
+    if (!window.confirm('Tem certeza que deseja excluir este arquivo?')) return;
     try {
       await deleteDoc(doc(db, 'transparencia', id));
       fetchArquivos();
@@ -89,8 +81,7 @@ export const PainelAdmin = () => {
   };
 
   const handleDeleteNoticia = async (id) => {
-    const confirm = window.confirm('Tem certeza que deseja excluir esta notícia?');
-    if (!confirm) return;
+    if (!window.confirm('Tem certeza que deseja excluir esta notícia?')) return;
     try {
       await deleteDoc(doc(db, 'noticias', id));
       fetchNoticias();
@@ -102,14 +93,12 @@ export const PainelAdmin = () => {
 
   const fetchArquivos = async () => {
     const snapshot = await getDocs(collection(db, 'transparencia'));
-    const lista = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    setArquivoTransparencia(lista);
+    setArquivoTransparencia(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
   };
 
   const fetchNoticias = async () => {
     const snapshot = await getDocs(collection(db, 'noticias'));
-    const lista = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    setNoticias(lista);
+    setNoticias(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
   };
 
   useEffect(() => {
@@ -120,8 +109,7 @@ export const PainelAdmin = () => {
   useEffect(() => {
     const fetchVoluntarios = async () => {
       const snapshot = await getDocs(collection(db, 'voluntarios'));
-      const lista = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setVoluntarios(lista);
+      setVoluntarios(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     };
     fetchVoluntarios();
   }, []);
@@ -136,54 +124,26 @@ export const PainelAdmin = () => {
         {/* Formulário de Nova Notícia */}
         <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow mb-12">
           <h2 className="text-2xl font-semibold mb-4">Publicar Notícia</h2>
-          <input
-            type="text"
-            placeholder="Título"
-            value={form.titulo}
-            onChange={(e) => setForm({ ...form, titulo: e.target.value })}
-            className="w-full p-2 mb-4 border rounded"
-          />
-          <ReactQuill
-            theme="snow"
-            value={form.conteudo}
-            onChange={(value) => setForm({ ...form, conteudo: value })}
-            className="mb-4 bg-white"
-          />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setForm({ ...form, imagem: e.target.files[0] })}
-            className="w-full p-2 mb-4"
-          />
-          <button
-            type="submit"
-            className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-          >
-            Publicar Notícia
-          </button>
+          <input type="text" placeholder="Título" value={form.titulo} onChange={(e) => setForm({ ...form, titulo: e.target.value })} className="w-full p-2 mb-4 border rounded" />
+          <ReactQuill theme="snow" value={form.conteudo} onChange={(value) => setForm({ ...form, conteudo: value })} className="mb-4 bg-white" />
+          <input type="file" accept="image/*" onChange={(e) => setForm({ ...form, imagem: e.target.files[0] })} className="w-full p-2 mb-4" />
+          <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Publicar Notícia</button>
         </form>
 
         {/* Lista de Notícias */}
         <div className="bg-white p-6 rounded-lg shadow mb-12">
           <h2 className="text-2xl font-bold mb-4">Notícias Publicadas</h2>
-          <ul className="space-y-4">
+          <div className="grid gap-4">
             {noticias.map((noticia) => (
-              <li key={noticia.id} className="border p-4 rounded">
-                <h3 className="font-bold text-lg">{noticia.titulo}</h3>
-                <div className="flex justify-between mt-2">
-                  <span className="text-sm text-gray-500">
-                    {noticia.criadoEm?.seconds ? new Date(noticia.criadoEm.seconds * 1000).toLocaleDateString() : 'Sem data'}
-                  </span>
-                  <button
-                    onClick={() => handleDeleteNoticia(noticia.id)}
-                    className="text-red-500 hover:underline text-sm"
-                  >
-                    Excluir
-                  </button>
+              <div key={noticia.id} className="p-4 bg-gray-100 rounded shadow flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-semibold text-purple-700">{noticia.titulo}</h3>
+                  <p className="text-sm text-gray-500">{noticia.criadoEm?.seconds ? new Date(noticia.criadoEm.seconds * 1000).toLocaleDateString() : 'Sem data'}</p>
                 </div>
-              </li>
+                <button onClick={() => handleDeleteNoticia(noticia.id)} className="text-red-600 hover:underline text-sm">Excluir</button>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
 
         {/* Lista de Voluntários */}
@@ -193,8 +153,10 @@ export const PainelAdmin = () => {
             {voluntarios.map((voluntario) => (
               <div key={voluntario.id} className="p-4 border rounded shadow">
                 <h3 className="text-xl font-semibold">{voluntario.nome}</h3>
+                <p><strong>Telefone:</strong> {voluntario.telefone}</p>
                 <p><strong>Email:</strong> {voluntario.email}</p>
                 <p><strong>Habilidades:</strong> {voluntario.habilidades}</p>
+                <p><strong>Tipo de Voluntariado:</strong> {voluntario.tipoVoluntariado}</p>
                 <p><strong>Status:</strong> {voluntario.status}</p>
               </div>
             ))}
@@ -205,41 +167,17 @@ export const PainelAdmin = () => {
         <div className="bg-white p-6 rounded-lg shadow mt-12">
           <h2 className="text-2xl font-bold mb-4">Transparência</h2>
           <form onSubmit={handleUploadArquivo} className="mb-4">
-            <input
-              type="file"
-              accept=".pdf,.doc,.png,.jpg,.jpeg"
-              onChange={(e) => setArquivo(e.target.files[0])}
-              className="mb-2"
-            />
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-              Enviar Arquivo
-            </button>
+            <input type="file" accept=".pdf,.doc,.png,.jpg,.jpeg" onChange={(e) => setArquivo(e.target.files[0])} className="mb-2" />
+            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Enviar Arquivo</button>
           </form>
 
           <ul className="list-disc list-inside space-y-2">
             {arquivosTransparencia.map((item) => (
               <li key={item.id} className="flex justify-between items-center">
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline"
-                >
-                  {item.nome}
-                </a>
+                <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">{item.nome}</a>
                 <div className="flex gap-2 items-center">
-                  <span className="text-sm text-gray-500">
-                    {item.enviadoEm?.seconds ? new Date(item.enviadoEm.seconds * 1000).toLocaleDateString() : 'Data não disponível'}
-                  </span>
-                  <button
-                    onClick={() => handleDeleteArquivo(item.id)}
-                    className="text-red-500 hover:underline text-sm"
-                  >
-                    Excluir
-                  </button>
+                  <span className="text-sm text-gray-500">{item.enviadoEm?.seconds ? new Date(item.enviadoEm.seconds * 1000).toLocaleDateString() : 'Data não disponível'}</span>
+                  <button onClick={() => handleDeleteArquivo(item.id)} className="text-red-500 hover:underline text-sm">Excluir</button>
                 </div>
               </li>
             ))}
