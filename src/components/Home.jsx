@@ -9,11 +9,11 @@ import { ScrollTrigger } from 'gsap/all';
 gsap.registerPlugin(ScrollTrigger)
 
 export const Home = () => {
-  const [currentIndex, setCurrentIndex] = useState(1);
+const [currentIndex, setCurrentIndex] = useState(1);
   const [isMobile, setMobile] = useState(false);
-  const handlerClick =  (() => {
-    alert('botao clicado!')
-  })
+
+  
+
   useGSAP(() => {
     gsap.set('#video-frame', {
       clipPath:'polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)',
@@ -75,7 +75,7 @@ export const Home = () => {
               A casa da mulher de Ribeirão Preto: apoio, proteção e transformação para um futuro livre de violência. 
               Venha conhecer mais sobre nossos trabalhos e ações.
             </p>
-            <Button id="local" onclick={handlerClick} title="Venha Conhecer" leftIcon={<TiLocationArrow/>}
+            <Button  scrollTarget="#caracteristicas" title="Nossa Jornada" leftIcon={<TiLocationArrow/>}
             containerClass="bg-yellow-300 flex-center gap-1"/>
           </div>
         </div>
