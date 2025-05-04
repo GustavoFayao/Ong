@@ -83,8 +83,8 @@ export const Navbar = () => {
               title="Transforme Vidas"
               to='/doacao'
               rightIcon={<TiLocationArrow />}
-              containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1 hover:bg-blue-100 transition-colors"
-            />
+              containerClass="bg-blue-50 flex items-center justify-center gap-1 hover:bg-blue-100 transition-colors"
+             />
           </div>
 
           {/* Botão Mobile */}

@@ -155,9 +155,9 @@ export const PainelAdmin = () => {
                 <h3 className="text-xl font-semibold">{voluntario.nome}</h3>
                 <p><strong>Telefone:</strong> {voluntario.telefone}</p>
                 <p><strong>Email:</strong> {voluntario.email}</p>
-                <p><strong>Habilidades:</strong> {voluntario.habilidades}</p>
+                <p><strong>Motivação:</strong> {voluntario.motivacao}</p>
+                <p><strong>Melhorias:</strong> {voluntario.melhoras}</p>
                 <p><strong>Tipo de Voluntariado:</strong> {voluntario.tipoVoluntariado}</p>
-                <p><strong>Status:</strong> {voluntario.status}</p>
               </div>
             ))}
           </div>

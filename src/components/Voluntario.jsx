@@ -23,17 +23,18 @@ export default function Voluntario() {
         nome: form.nome,
         telefone: form.telefone,
         email: form.email,
-        habilidades: form.habilidades,
+        motivacao: form.motivacao,
+        melhoras: form.melhoras,
         tipoVoluntariado: tipoFinal,
         data: new Date(),
-        status: 'pendente',
       });
       setEnviado(true);
       setForm({
         nome: '',
         telefone: '',
         email: '',
-        habilidades: '',
+        Motivação: '',
+        Melhoras:'',
         tipoVoluntariado: '',
         outroTipo: '',
       });
@@ -111,11 +112,30 @@ export default function Voluntario() {
           required
           className="w-full p-3 border rounded"
         />
+
         <input
           type="email"
           placeholder="Email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
+          required
+          className="w-full p-3 border rounded"
+        />
+
+        <input
+          type="tel"
+          placeholder="Qual sua motivação para participar como voluntário(a)?"
+          value={form.motivacao}
+          onChange={(e) => setForm({ ...form, motivacao: e.target.value })}
+          required
+          className="w-full p-3 border rounded"
+        />
+
+        <input
+          type="tel"
+          placeholder="Teria alguma sugestão para implementar no formulario?"
+          value={form.melhoras}
+          onChange={(e) => setForm({ ...form, melhoras: e.target.value })}
           required
           className="w-full p-3 border rounded"
         />
@@ -144,7 +164,9 @@ export default function Voluntario() {
             onChange={(e) => setForm({ ...form, outroTipo: e.target.value })}
             className="w-full p-2 border rounded"
           />
-        )}    
+        )}
+        
+            
         <button
           type="submit"
           className="w-full bg-purple-700 text-white py-2 rounded hover:bg-purple-800 transition-colors"

@@ -35,8 +35,8 @@ export const AnimatedTitle = ({ title, containerClass }) => {
   }, []);
 
   return (
-    <div ref={containerRef} className={clsx("animated-title text-lg sm:text-sm md:text-2xl lg:text-3xl"
-, containerClass)}>
+    <div ref={containerRef} className={clsx("animated-title w-full overflow-hidden", "text-sm sm:text-base md:text-lg xl:text-2xl ",
+      containerClass)}>
       {title.split("<br />").map((line, index) => (
         <div
           key={index}
