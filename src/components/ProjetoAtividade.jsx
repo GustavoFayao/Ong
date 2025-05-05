@@ -1,10 +1,6 @@
 import React from 'react'
 import { AnimatedTitle } from './AnimatedTitle'
 export const ProjetoAtividade = () => {
-
-
-
-  
   return (
     <>
     <section id='voce-pode' className='min-h-screen bg-purple-700 p-8'>
@@ -41,6 +37,21 @@ export const ProjetoAtividade = () => {
           </div>
           <img src="/img/promotoraslegais.png" alt="imagem do projeto" className='my-8 mt-20 mx-auto rounded shadow w-3/4' />
     </section>
+    
+    <section id='' className='min-h-screen bg-purple-700 p-8'>
+    <div className='relative mb-8 mt-20 flex flex-col  gap-5 px-6'>
+          <AnimatedTitle
+          title='Maternar'/>
+          </div>
+          <div>             
+            <p className='font-circular-web text-lg mt-2 mb-2 text-blue-50'>O Projeto Maternar de Ribeirão Preto é uma iniciativa iniciada em 2021, motivada pelos impactos negativos da pandemia de Covid-19, com foco principal na saúde sexual e reprodutiva. É direcionado a mulheres em idade reprodutiva, crianças e adolescentes que vivem em comunidades vulneráveis da cidade, promovendo ações voltadas à saúde e ao bem-estar.</p>
+            <p className='font-circular-web text-lg mt-2 mb-2 text-blue-50'>O projeto tem como objetivo realizar atividades que estimulem a discussão sobre a saúde da mulher e da criança nessas comunidades. Ele surgiu a partir da entrega de enxovais para recém-nascidos e da identificação de necessidades relacionadas à maternidade, ao planejamento familiar e às dificuldades de acesso aos serviços de saúde.  </p>
+            <p className='font-circular-web text-lg mt-2 mb-2 text-blue-50'>Organizado de forma colaborativa e coletiva, o projeto realiza rodas de conversa e oficinas sobre saúde sexual e reprodutiva voltadas para mulheres e meninas, com o intuito de empoderá-las quanto aos seus direitos, combater a violência de gênero e promover atividades com crianças alinhadas aos Objetivos de Desenvolvimento Sustentável (ODS 2, 3, 4 e 5).</p>
+            <p className='font-circular-web text-lg mt-2 mb-2 text-blue-50'>Entre seus objetivos estão: oferecer acolhimento, promover a educação em saúde e garantir uma alimentação saudável. As metas incluem a realização de rodas de conversa sobre maternidade e a elaboração de uma cartilha informativa no prazo de até quatro meses.</p>            
+          </div>
+          <img src="/img/projetomaterna.png" alt="imagem do projeto" className='my-8 mt-20 mx-auto rounded shadow w-3/4' />
+    </section>
+    
     </>
   )
 }
