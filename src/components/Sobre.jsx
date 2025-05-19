@@ -50,11 +50,6 @@ export const Sobre = () => {
         <p className="text-sm font-semibold tracking-widest uppercase md:text-base">
           Bem Vinda!
         </p>
-        
-        <AnimatedTitle
-          title="Aqui nós cuidamos de você da forma que precisar"
-          containerClass="mt-5 !text-black text-center"
-        />
         <div className="about-subtext mt-4">
           <p className="text-lg font-medium">
             Nós, da Casa da Mulher, estamos na luta pelos direitos das mulheres
